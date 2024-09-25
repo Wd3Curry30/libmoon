@@ -55,18 +55,18 @@ make -j $NUM_CPUS BUILDMODE=static 'CFLAGS=-DLUAJIT_NUMMODE=2 -DLUAJIT_ENABLE_LU
 make install DESTDIR=$(pwd)
 )
 
-(
-cd deps/dpdk
-#build DPDK with the right configuration
-make config T=x86_64-native-linuxapp-gcc O=x86_64-native-linuxapp-gcc
-if ${MLX5} ; then
-	sed -ri 's,(MLX5_PMD=).*,\1y,' x86_64-native-linuxapp-gcc/.config
-fi
-if ${MLX4} ; then
-	sed -ri 's,(MLX4_PMD=).*,\1y,' x86_64-native-linuxapp-gcc/.config
-fi
-EXTRA_CFLAGS="-Wno-error" make -j $NUM_CPUS O=x86_64-native-linuxapp-gcc
-)
+#(
+#cd deps/dpdk
+##build DPDK with the right configuration
+#make config T=x86_64-native-linuxapp-gcc O=x86_64-native-linuxapp-gcc
+#if ${MLX5} ; then
+#	sed -ri 's,(MLX5_PMD=).*,\1y,' x86_64-native-linuxapp-gcc/.config
+#fi
+#if ${MLX4} ; then
+#	sed -ri 's,(MLX4_PMD=).*,\1y,' x86_64-native-linuxapp-gcc/.config
+#fi
+#EXTRA_CFLAGS="-Wno-error" make -j $NUM_CPUS O=x86_64-native-linuxapp-gcc
+#)
 
 (
 cd lua/lib/turbo
